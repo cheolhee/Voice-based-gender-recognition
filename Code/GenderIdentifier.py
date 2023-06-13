@@ -3,6 +3,7 @@ import pickle
 import warnings
 import numpy as np
 from FeaturesExtractor import FeaturesExtractor
+import re
 
 warnings.filterwarnings("ignore")
 
@@ -28,7 +29,8 @@ class GenderIdentifier:
 
             vector = self.features_extractor.extract_features(file)
             winner = self.identify_gender(vector)
-            expected_gender = file.split("/")[1][:-1]
+            split0 = re.split(r"[\\/]", file)
+            expected_gender = split0[1][:-1]
 
             print("%10s %6s %1s" % ("+ EXPECTATION",":", expected_gender))
             print("%10s %3s %1s" %  ("+ IDENTIFICATION", ":", winner))
