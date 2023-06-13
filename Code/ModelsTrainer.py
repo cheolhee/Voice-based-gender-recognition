@@ -2,7 +2,7 @@ import os
 import pickle
 import warnings
 import numpy as np
-from sklearn.mixture import GaussianMixture as GMM
+from sklearn.mixture import GaussianMixture
 from FeaturesExtractor import FeaturesExtractor
 
 warnings.filterwarnings("ignore")
@@ -22,8 +22,8 @@ class ModelsTrainer:
         female_voice_features = self.collect_features(females)
         male_voice_features   = self.collect_features(males)
         # generate gaussian mixture models
-        females_gmm = GMM(n_components = 16, max_iter = 200, covariance_type='diag', n_init = 3)
-        males_gmm   = GMM(n_components = 16, max_iter = 200, covariance_type='diag', n_init = 3)
+        females_gmm = GaussianMixture(n_components = 16, max_iter = 200, covariance_type='diag', n_init = 3)
+        males_gmm   = GaussianMixture(n_components = 16, max_iter = 200, covariance_type='diag', n_init = 3)
         # fit features to models
         females_gmm.fit(female_voice_features)
         males_gmm.fit(male_voice_features)
